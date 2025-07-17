@@ -1,31 +1,31 @@
 [versions]
-agp = "8.8.2"
-coilCompose = "3.1.0"
-converterMoshi = "2.11.0"
-hiltAndroidVersion = "2.56.1"
+agp = "8.11.1"
+coilCompose = "3.2.0"
+converterMoshi = "3.0.0"
+hiltAndroidVersion = "2.57"
 hiltNavigationCompose = "1.2.0"
-kotlin = "2.0.21"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-kotlinxSerializationJson = "1.7.3"
-lifecycleRuntimeKtx = "2.9.1"
+kotlinxSerializationJson = "1.9.0"
+lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
-composeBom = "2025.06.01"
-ksp = "2.0.21-1.0.27"
-hiltAndroid = "2.56.1"
-loggingInterceptor = "4.12.0"
-moshi = "1.15.1"
-moshiKotlin = "1.15.0"
-moshiKotlinCodegen = "1.15.0"
-navigationCompose = "2.9.1"
+composeBom = "2025.07.00"
+ksp = "2.1.21-2.0.1"
+hiltAndroid = "2.57"
+loggingInterceptor = "5.1.0"
+moshi = "1.15.2"
+moshiKotlin = "1.15.2"
+moshiKotlinCodegen = "1.15.2"
+navigationCompose = "2.9.2"
 appcompat = "1.7.1"
 material = "1.12.0"
-okhttp = "4.12.0"
-okhttpBom = "4.12.0"
+okhttp = "5.1.0"
+okhttpBom = "5.1.0"
 pagingRuntimeKtx = "3.3.6"
-retrofit = "2.11.0"
+retrofit = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -69,7 +69,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.21" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.2.0" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 
