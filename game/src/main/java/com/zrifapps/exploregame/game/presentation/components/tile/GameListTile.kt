@@ -80,7 +80,6 @@ fun GameListTile(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Rating with Star
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "★ ${game.rating}/5",

@@ -20,7 +20,6 @@ class GamePagingSource @Inject constructor(
             val page = params.key ?: 1
             val pageSize = params.loadSize
 
-            // Use repository instead of direct API call
             val result = gameRepository.getGames(
                 request = GetGamesRequest(
                     page = page,

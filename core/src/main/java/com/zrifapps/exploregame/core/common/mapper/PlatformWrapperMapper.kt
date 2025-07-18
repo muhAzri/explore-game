@@ -8,4 +8,3 @@ fun PlatformWrapperDTO.toDomain(): PlatformWrapper {
         platform = platform.toDomain()
     )
 }
-

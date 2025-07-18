@@ -79,4 +79,12 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":game"))
+
+    // Play Feature Delivery
+    implementation(libs.play.feature.delivery)
+    implementation(libs.play.feature.delivery.ktx)
+
+    // Image loading
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }

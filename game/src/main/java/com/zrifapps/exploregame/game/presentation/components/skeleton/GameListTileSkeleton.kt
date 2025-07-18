@@ -40,7 +40,6 @@ fun GameListTileSkeleton() {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(modifier = Modifier.fillMaxSize()) {
-            // Image skeleton
             ShimmerBox(
                 modifier = Modifier
                     .width(100.dp)
@@ -54,14 +53,12 @@ fun GameListTileSkeleton() {
                     .padding(12.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                // Title skeleton
                 ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.7f)
                         .height(20.dp)
                 )
 
-                // Release date skeleton
                 ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
@@ -73,14 +70,12 @@ fun GameListTileSkeleton() {
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Rating skeleton
                     ShimmerBox(
                         modifier = Modifier
                             .width(60.dp)
                             .height(16.dp)
                     )
 
-                    // Platform chips skeleton
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                         verticalAlignment = Alignment.CenterVertically

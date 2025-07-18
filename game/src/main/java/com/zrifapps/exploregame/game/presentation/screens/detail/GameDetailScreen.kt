@@ -24,9 +24,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -101,6 +102,29 @@ fun GameDetailScreen(
                         )
                     }
                 },
+                actions = {
+                    if (uiState.game != null) {
+                        IconButton(onClick = { viewModel.toggleFavourite() }) {
+                            Icon(
+                                imageVector = if (uiState.isFavourite) {
+                                    Icons.Filled.Favorite
+                                } else {
+                                    Icons.Filled.FavoriteBorder
+                                },
+                                contentDescription = if (uiState.isFavourite) {
+                                    "Remove from favourites"
+                                } else {
+                                    "Add to favourites"
+                                },
+                                tint = if (uiState.isFavourite) {
+                                    Color.Red
+                                } else {
+                                    MaterialTheme.colorScheme.onSurface
+                                }
+                            )
+                        }
+                    }
+                }
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -114,9 +138,11 @@ fun GameDetailScreen(
                 uiState.isLoading -> {
                     GameDetailSkeleton()
                 }
+
                 uiState.game != null -> {
                     GameDetailContent(game = uiState.game!!)
                 }
+
                 uiState.error != null -> {
                     Column(
                         modifier = Modifier
