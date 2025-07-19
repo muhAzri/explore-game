@@ -39,9 +39,7 @@ class GameDetailViewModel @Inject constructor(
                             error = null
                         )
 
-                        result.data?.let { game ->
-                            checkFavouriteStatus(game.id)
-                        }
+                        checkFavouriteStatus(result.data.id)
                     }
 
                     is NetworkResult.Error -> {

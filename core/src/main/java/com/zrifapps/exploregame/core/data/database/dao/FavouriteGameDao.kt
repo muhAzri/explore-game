@@ -13,17 +13,11 @@ interface FavouriteGameDao {
     @Query("SELECT * FROM favourite_games ORDER BY dateAdded DESC")
     fun getAllFavouriteGames(): Flow<List<FavouriteGameEntity>>
 
-    @Query("SELECT * FROM favourite_games WHERE id = :gameId LIMIT 1")
-    fun getFavouriteGameById(gameId: Int): Flow<FavouriteGameEntity?>
-
     @Query("SELECT EXISTS(SELECT 1 FROM favourite_games WHERE id = :gameId)")
     fun isFavourite(gameId: Int): Flow<Boolean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavouriteGame(game: FavouriteGameEntity)
-
-    @Delete
-    suspend fun deleteFavouriteGame(game: FavouriteGameEntity)
 
     @Query("DELETE FROM favourite_games WHERE id = :gameId")
     suspend fun deleteFavouriteGameById(gameId: Int)
