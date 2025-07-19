@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kover)
+    alias(libs.plugins.dependency.check)
 }
 
 android {
@@ -25,11 +27,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Enable signature verification
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            isMinifyEnabled = false
+            enableUnitTestCoverage = true
         }
     }
     compileOptions {
@@ -87,4 +96,30 @@ dependencies {
     // Image loading
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    
+    // Testing dependencies
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    
+    // Performance & Security
+    debugImplementation(libs.leakcanary.android)
+}
+
+// Kover configuration for code coverage
+koverReport {
+    defaults {
+        xml {
+            onCheck = false
+        }
+        html {
+            onCheck = false
+        }
+        verify {
+            rule {
+                minBound(70)
+            }
+        }
+    }
 }

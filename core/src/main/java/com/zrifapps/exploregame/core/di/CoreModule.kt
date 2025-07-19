@@ -6,10 +6,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zrifapps.exploregame.core.common.manager.ConfigManager
 import com.zrifapps.exploregame.core.data.database.AppDatabase
+import com.zrifapps.exploregame.core.data.database.SecureDatabaseFactory
 import com.zrifapps.exploregame.core.data.database.dao.FavouriteGameDao
 import com.zrifapps.exploregame.core.data.repository.FavouriteGameRepositoryImpl
 import com.zrifapps.exploregame.core.domain.repository.FavouriteGameRepository
 import com.zrifapps.exploregame.core.network.ApiKeyInterceptor
+import com.zrifapps.exploregame.core.network.CertificatePinningInterceptor
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -50,16 +52,27 @@ object CoreModule {
     fun provideApiKeyInterceptor(config: ConfigManager): ApiKeyInterceptor {
         return ApiKeyInterceptor(configManager = config)
     }
+    
+    @Provides
+    @Singleton
+    fun provideCertificatePinningInterceptor(@ApplicationContext context: Context): CertificatePinningInterceptor {
+        return CertificatePinningInterceptor(context)
+    }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
         apiKeyInterceptor: ApiKeyInterceptor,
-    ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(apiKeyInterceptor)
-        .addInterceptor(loggingInterceptor)
-        .build()
+        certificatePinningInterceptor: CertificatePinningInterceptor,
+    ): OkHttpClient {
+        val baseClient = OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .build()
+            
+        return certificatePinningInterceptor.createSecureOkHttpClient(baseClient)
+    }
 
     @Provides
     @Singleton
@@ -75,12 +88,14 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            AppDatabase.DATABASE_NAME
-        ).build()
+    fun provideSecureDatabaseFactory(@ApplicationContext context: Context): SecureDatabaseFactory {
+        return SecureDatabaseFactory(context)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideAppDatabase(secureDatabaseFactory: SecureDatabaseFactory): AppDatabase {
+        return secureDatabaseFactory.createAppDatabase()
     }
 
     @Provides
