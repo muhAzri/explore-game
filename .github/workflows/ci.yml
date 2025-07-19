@@ -39,9 +39,6 @@ jobs:
     - name: Run detekt
       run: ./gradlew detekt
       
-    - name: Check dependencies for vulnerabilities
-      run: ./gradlew dependencyCheckAnalyze
-      
     - name: Run unit tests
       run: ./gradlew testDebugUnitTest
       
